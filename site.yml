@@ -1,0 +1,7 @@
+---
+- name: Apply security hardening
+  hosts: [ubuntu]
+  become: true
+  roles:
+    - sshd_config
+    - firewall_defense
