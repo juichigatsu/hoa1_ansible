@@ -20,3 +20,24 @@
 - name: Enable UFW
   ufw:
     state: enabled
+
+- name: PANIC MODE - Flush all firewall rules
+  iptables:
+    flush: yes
+  when: panic_mode
+
+- name: PANIC MODE - Set default INPUT policy to DROP
+  iptables:
+    chain: INPUT
+    policy: DROP
+  when: panic_mode
+
+- name: PANIC MODE - Drop ICMP (Ping)
+  iptables:
+    chain: INPUT
+    protocol: icmp
+    jump: DROP
+  when: panic_mode
+
+
+
